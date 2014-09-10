@@ -33,10 +33,10 @@
 		padding-top:60px;
 	}
         .body{
-            margin-left: 20px;
+            margin-left: 100px;
             margin-right: 20px;
+            width: 80%;
         }
-
 	</style>
 </head>
 
