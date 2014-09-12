@@ -9,11 +9,11 @@
 			$password = $_POST['password'];
 			$coneccion = get_conection($usuario,$password);
 			if($coneccion!==false){
-				header("Location: ../welcome.php");
+				header("Location: ../index.php");
 				$_SESSION['usuario'] = $usuario;
 				$_SESSION['pass']	 = $password;
 				$_SESSION['session_begin']=  date("d/m/Y H:i");
-			    header("Location: ../welcome.php");
+			    header("Location: ../index.php");
 				die();
 			}else{
 				header("Location: ../index.php?error="."No se puede Conectar");
@@ -36,11 +36,11 @@
 			$estado = alta_cliente($apellido,$nombre,$edad,$usuario,$password);
 			if($estado == 1){
 				$_SESSION['archivo'] = "nuevo.php";
-				header( "Location: ../welcome.php?conf=ok");
+				header( "Location: ../index.php?conf=ok");
 				die(); 				
 			}else{
 				$_SESSION['archivo'] = "nuevo.php";
-				header( "Location: ../welcome.php?err=no se pudo guardar");
+				header( "Location: ../index.php?err=no se pudo guardar");
 				die();
 			}
 
@@ -58,13 +58,13 @@
 				$cliente = obtener_cliente($id, $usuario, $password);
                                 $_SESSION['archivo'] = "edita_cliente.php";
                                 $_SESSION['cliente'] = $cliente;
-				header( "Location: ../welcome.php?conf=ok");
+				header( "Location: ../index.php?conf=ok");
 				die(); 				
 			}else{
 				$cliente = obtener_cliente($id, $usuario, $password);
                                 $_SESSION['archivo'] = "edita_cliente.php";
                                 $_SESSION['cliente'] = $cliente;
-				header( "Location: ../welcome.php?err=no se pudo guardar");
+				header( "Location: ../index.php?err=no se pudo guardar");
 				die();
 			}
                         
@@ -82,11 +82,11 @@
 			$results = listar_clientes($usuario, $password);
 			$_SESSION['archivo'] = "listado.php";
 			$_SESSION['listado'] = $results;
-			header( "Location: ../welcome.php");
+			header( "Location: ../index.php");
 			die();
 		}elseif($_GET['op'] == 'nuevo'){
 			$_SESSION['archivo'] = "nuevo.php";
-			header( "Location: ../welcome.php");
+			header( "Location: ../index.php");
 			die(); 
 
 		}elseif($_GET['op'] == 'edit' ){
@@ -96,7 +96,7 @@
                     $cliente = obtener_cliente($id, $usuario, $password);
                     $_SESSION['archivo'] = "edita_cliente.php";
                     $_SESSION['cliente'] = $cliente;
-                    header("Location: ../welcome.php");
+                    header("Location: ../index.php");
                     
                 }elseif($_GET['op'] == 'remove' ){
                     $id = $_GET['row'];
@@ -106,14 +106,14 @@
                     $results = listar_clientes($usuario, $password);
                     $_SESSION['archivo'] = "listado.php";
                     $_SESSION['listado'] = $results;
-                    header("Location: ../welcome.php?del=ok");
+                    header("Location: ../index.php?del=ok");
                     die();
                 }elseif($_GET['op'] == 'buscar_form'){
                     if(isset($_SESSION['listado'])){
                         unset($_SESSION['listado']);
                     }
                     $_SESSION['archivo'] = "buscar.php";
-                    header("Location: ../welcome.php");
+                    header("Location: ../index.php");
                     die();
                 }
 
@@ -142,6 +142,6 @@
             $results = buscar($apellido,$nombre,$usuario,$password);
             $_SESSION['archivo'] = "buscar.php";
             $_SESSION['listado'] = $results;
-            header("Location: ../welcome.php");
+            header("Location: ../index.php");
             die();
         }

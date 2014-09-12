@@ -1,4 +1,4 @@
-<?php session_start();
+<?php //session_start();
 	if(isset($_SESSION['archivo']) && $_SESSION['archivo']!="" ){
 		$archivo =$_SESSION['archivo'];
 	}
@@ -43,7 +43,8 @@
 <body class="body">
 	<div class="container">
 	<div class="row clearfix">
-		<div class="col-md-12 column">
+            
+		<div class="col-xs-10">
 			<nav class="navbar navbar-default navbar-fixed-top navbar-inverse" role="navigation">
 				<div class="navbar-header">
 					 <button type="button" class="navbar-toggle" data-toggle="collapse" data-target="#bs-example-navbar-collapse-1"> <span class="sr-only">Toggle navigation</span><span class="icon-bar"></span><span class="icon-bar"></span><span class="icon-bar"></span></button> <a class="navbar-brand" href="#">Clientes_bd</a>
@@ -82,6 +83,7 @@
 				
 			</nav>
 		</div>
+             
 	</div>
 
 </div>
