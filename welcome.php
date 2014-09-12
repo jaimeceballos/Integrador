@@ -62,7 +62,7 @@
 									<a href="controller/controller.php?op=nuevo">Nuevo</a>
 								</li>
 								<li>
-									<a href="#">Buscar</a>
+                                                                    <a href="controller/controller.php?op=buscar_form">Buscar</a>
 								</li>
 							</ul>
 						</li>

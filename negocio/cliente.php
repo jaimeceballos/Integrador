@@ -1,9 +1,11 @@
 <?php
+    //require_once 'clienteDAO.php';
+					
 	function alta_cliente($apellido,$nombre,$edad,$usuario,$password){
 		if($apellido!=""){
 			if($nombre!=""){
 				if($edad>0){
-					require_once("../dao/clienteDAO.php");
+                                    require_once '../dao/clienteDAO.php';
 					return cliente_save($apellido,$nombre,$edad,$usuario,$password);
 				}else{
 					return "no ingreso edad";
@@ -26,5 +28,13 @@
         function borrar_cliente($id,$usuario,$password){
             require_once '../dao/clienteDAO.php';
             return del_cliente_by_id($id,$usuario,$password);
+        }
+        function update_cliente($id,$apellido,$nombre,$edad,$usuario,$password){
+            require_once '../dao/clienteDAO.php';
+            return update_cliente_id($id, $apellido, $nombre, $edad,$usuario,  $password);
+        }
+        function buscar($apellido,$nombre,$edad,$usuario,$password){
+            require_once '../dao/clienteDAO.php';
+            return search($apellido,$nombre,$edad,$usuario,$password);
         }
         

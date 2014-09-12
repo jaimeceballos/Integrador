@@ -20,6 +20,7 @@
         <form role="form" method="POST" action = "controller/controller.php">
 
             <input type="hidden" name="formulario" value="modifica">
+            <input type="hidden" name="id" value="<?php echo $cliente['id'] ?>">
             <div class="form-group">
                 <label for="Apellido">Apellido</label><input type="text" class="form-control" name="apellido" value="<?php echo $cliente['apellido'] ?>" required />
             </div>
@@ -29,9 +30,12 @@
             <div class="form-group">
                 <label for="edad">Edad</label><select  class="form-control" name="edad">
                     <option value="">Seleccione Edad</option>
-                    <option value="<?php echo $cliente['edad'] ?>" selected="selected"><?php echo $cliente['edad'] ?></option>
                     <?php for ($i = 1; $i < 100; $i++) : ?>
-                        <option value="<?php echo $i ?>" ><?php echo $i ?></option>
+                        <?php if($i == $cliente['edad']): ?>
+                            <option value="<?php echo $i ?>" selected="selected"><?php echo $i ?></option>
+                        <?php else: ?>
+                            <option value="<?php echo $i ?>" ><?php echo $i ?></option>
+                        <?php endif; ?>
                     <?php endfor; ?>
                 </select>
             </div>

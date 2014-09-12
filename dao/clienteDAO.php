@@ -1,7 +1,8 @@
 <?php
-
+require_once("../controller/conectar.php");
+    
 function cliente_save($apellido, $nombre, $edad, $usuario, $password) {
-    require_once("../controller/conectar.php");
+    
     $coneccion = get_conection($usuario, $password);
     if ($coneccion !== false) {
         $id = cliente_exist($apellido, $nombre, $edad, $usuario, $password);
@@ -40,7 +41,6 @@ function cliente_save($apellido, $nombre, $edad, $usuario, $password) {
 }
 
 function cliente_exist($apellido, $nombre, $edad, $usuario, $password) {
-    require_once("../controller/conectar.php");
     $coneccion = get_conection($usuario, $password);
     if ($coneccion !== false) {
         try {
@@ -66,7 +66,6 @@ function cliente_exist($apellido, $nombre, $edad, $usuario, $password) {
 }
 
 function get_clientes($usuario, $password) {
-    require_once("../controller/conectar.php");
     $coneccion = get_conection($usuario, $password);
     if ($coneccion !== false) {
         try {
@@ -84,7 +83,6 @@ function get_clientes($usuario, $password) {
 }
 
 function get_cliente_by_id($id, $usuario, $password) {
-    require_once("../controller/conectar.php");
     $coneccion = get_conection($usuario, $password);
     if ($coneccion !== false) {
         try {
@@ -103,19 +101,62 @@ function get_cliente_by_id($id, $usuario, $password) {
 }
 
 function del_cliente_by_id($id, $usuario, $password) {
-    require_once("../controller/conectar.php");
     $coneccion = get_conection($usuario, $password);
     if ($coneccion !== false) {
         try {
+            $coneccion->beginTransaction();
             $sql = "DELETE FROM clientes WHERE id = :id";
 
             $stmt = $coneccion->prepare($sql);
             $stmt->setFetchMode(PDO::FETCH_ASSOC);
             $stmt->bindParam(':id', $id);
             $stmt->execute();
+            $coneccion->commit();
             return 1;
+        } catch (PDOException $e) {
+            $coneccion->rollBack();
+            return -1;
+        }
+    }
+}
+
+function update_cliente_id($id, $apellido, $nombre, $edad, $usuario, $password){
+        $coneccion = get_conection($usuario, $password);
+        if(coneccion !== false){
+        try {
+                $coneccion->beginTransaction();
+                $sql = "UPDATE clientes set apellido=:apellido, nombre=:nombre,edad=:edad where id=:id";
+                $query = $coneccion->prepare($sql);
+                $query->execute(array(':apellido' => $apellido,
+                    ':nombre' => $nombre,
+                    ':edad' => $edad,
+                    ':id' => $id));
+                $coneccion->commit();
+                return 1;
+            } catch (PDOException $e) {
+                $coneccion->rollBack();
+                return 0;
+            }
+        }
+}
+
+function buscar($apellido,$nombre,$edad,$usuario,$password){
+    $coneccion = get_conection($usuario, $password);
+    if ($coneccion !== false) {
+        try {
+            $sql = "SELECT * FROM clientes WHERE apellido like :apellido and nombre like :nombre and edad = :edad";
+
+            $stmt = $coneccion->prepare($sql);
+            $stmt->setFetchMode(PDO::FETCH_ASSOC);
+            $stmt->bindParam(':apellido', $apellido);
+            $stmt->bindParam(':nombre', $nombre);
+            $stmt->bindParam(':edad', $edad);
+            $stmt->execute();
+            $results = $stmt->fetchAll();
+            return $results;
         } catch (PDOException $e) {
             return -1;
         }
     }
+    
 }
