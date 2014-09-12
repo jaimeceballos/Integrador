@@ -109,6 +109,9 @@
                     header("Location: ../welcome.php?del=ok");
                     die();
                 }elseif($_GET['op'] == 'buscar_form'){
+                    if(isset($_SESSION['listado'])){
+                        unset($_SESSION['listado']);
+                    }
                     $_SESSION['archivo'] = "buscar.php";
                     header("Location: ../welcome.php");
                     die();
@@ -129,16 +132,16 @@
             }else{
                 $apellido = '%'.$_GET['apellido'].'%';
             }
-            if(empty($_GET['edad'])){
+            /*if(empty($_GET['edad'])){
                 $edad = '%';
             }else{
                 $edad = $_GET['edad'];
-            }
+            }*/
             
             
-            $results = buscar($apellido,$nombre,$edad,$usuario,$password);
+            $results = buscar($apellido,$nombre,$usuario,$password);
             $_SESSION['archivo'] = "buscar.php";
             $_SESSION['listado'] = $results;
-            header("Location: ../welcome.php?del=ok");
+            header("Location: ../welcome.php");
             die();
         }

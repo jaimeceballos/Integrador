@@ -54,7 +54,7 @@
 							</tr>
 						<?php endforeach; ?>
 					<?php else: ?>
-						<td colspan = "4"> NO HAY DATOS </td>
+						<td colspan = "4" align="center" class="warning"> NO HAY DATOS </td>
 					<?php endif; ?>
 						
 				

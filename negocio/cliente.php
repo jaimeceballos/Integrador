@@ -33,8 +33,8 @@
             require_once '../dao/clienteDAO.php';
             return update_cliente_id($id, $apellido, $nombre, $edad,$usuario,  $password);
         }
-        function buscar($apellido,$nombre,$edad,$usuario,$password){
+        function buscar($apellido,$nombre,$usuario,$password){
             require_once '../dao/clienteDAO.php';
-            return search($apellido,$nombre,$edad,$usuario,$password);
+            return search($apellido,$nombre,$usuario,$password);
         }
         

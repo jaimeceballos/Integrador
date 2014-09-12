@@ -1,5 +1,5 @@
 <div class="row clearfix">
-
+    <h3>Realizar la busqueda de clientes</h3>
     <div class="col-md-12 column">
         <?php if (isset($conf)): ?>
             <div class="alert alert-dismissable alert-info">
@@ -22,19 +22,20 @@
             <div class="form-group">
                 <label for="nombre">Nombre</label><input type="text" class="form-control" name="nombre" placeholder="Ingrese un nombre" />
             </div>
-            <div class="form-group">
+           <!-- <div class="form-group">
                 <label for="edad">Edad</label><select  class="form-control" name="edad">
                     <option value="">Seleccione Edad</option>
-                    <?php for ($i = 1; $i < 100; $i++) : ?>
-                        <option value="<?php echo $i ?>" ><?php echo $i ?></option>
-                    <?php endfor; ?>
+                    <!--?php for ($i = 1; $i < 100; $i++) : ?>
+                        <option value="<!--?php echo $i ?>" ><!--?php echo $i ?></option>
+                    <!--?php endfor; ?>
                 </select>
-            </div>
+            </div>-->
             <button type="submit" class="btn btn-info pull-right">Buscar</button>
         </form>
     </div>
-    <?php if(!empty($_SESSION['listado'])): ?>
+    <?php if(isset($_SESSION['listado'])): ?>
     <hr>
+    <h3>Resultados de la busqueda</h3>
         <?php include 'listado.php'; ?>
     <?php endif; ?>
 </div>

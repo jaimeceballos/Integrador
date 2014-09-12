@@ -140,17 +140,17 @@ function update_cliente_id($id, $apellido, $nombre, $edad, $usuario, $password){
         }
 }
 
-function buscar($apellido,$nombre,$edad,$usuario,$password){
+function search($apellido,$nombre,$usuario,$password){
     $coneccion = get_conection($usuario, $password);
     if ($coneccion !== false) {
         try {
-            $sql = "SELECT * FROM clientes WHERE apellido like :apellido and nombre like :nombre and edad = :edad";
+            $sql = "SELECT * FROM clientes WHERE apellido like :apellido and nombre like :nombre";// and edad = :edad";
 
             $stmt = $coneccion->prepare($sql);
             $stmt->setFetchMode(PDO::FETCH_ASSOC);
             $stmt->bindParam(':apellido', $apellido);
             $stmt->bindParam(':nombre', $nombre);
-            $stmt->bindParam(':edad', $edad);
+            //$stmt->bindParam(':edad', $edad);
             $stmt->execute();
             $results = $stmt->fetchAll();
             return $results;
